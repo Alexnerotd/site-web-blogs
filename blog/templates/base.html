@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Base {% endblock title %} | Your Exclusive Blog</title>
+    {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <link rel="icon" href="{% static 'blogs.png' %}" type="image/x-icon">
+</head>
+<body>
+    <style>
+        #nav{
+            margin: 1%;
+            padding: 1%;
+            border-radius: 10px;
+        }
+
+        /* Estilos para pantallas con un ancho máximo de 800px */
+        @media screen and (max-width: 800px) {
+            /* Centra los elementos verticalmente usando flexbox */
+            .navbar .navbar-nav {
+                display: flex;
+                flex-direction: row;
+                margin-right: 1%;
+                align-items: center; /* Centra horizontalmente */
+                justify-content: center; /* Centra verticalmente */
+                height: 100%;
+            }
+
+            /* Ajusta el tamaño de la imagen y el tamaño de fuente de los enlaces */
+            .navbar .navbar-nav img {
+                width: 80px;
+            }
+
+            .navbar .navbar-nav a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <nav id='nav' class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                {% if request.user.is_authenticated %}
+                <img id='img-perfil' src="{{user.image.url}}" alt="" style="width:60px;" class="rounded-pill">
+                {% endif %}
+            </a>
+
+            {% if request.user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a style='margin-right: 0.5rem;' href="#" class='nav-link'>Create Blog</a></li>
+                    <li class="nav-item"><a href="{% url 'logout' %}" class='nav-link'>Logout</a></li>
+                    <li class="nav-item"><a style='margin-right: 0.5rem;' href="#" class='nav-link'>My account</a></li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class='nav-link' href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class='nav-link' href="{% url 'register' %}">Sign Up</a></li>
+                    <li class="nav-item"><a class='nav-link' href="{% url 'login' %}">Login</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% block content %}
+    
+    {% endblock content %}
+</body>
+</html>

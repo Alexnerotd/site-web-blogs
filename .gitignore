@@ -1,0 +1,9 @@
+# Ignorar archivos
+.env
+
+# Ignorar la carpeta del entorno virtual
+venv/
+*.pyc
+
+# ignorar la carpeta media
+media/

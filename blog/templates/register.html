@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrarse{% endblock title %}
+
+
+{% block content %}
+
+{% load crispy_forms_tags%}
+<style>
+    #form{
+        width: 40%;
+    }
+    #container{
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+<h1 style='text-align: center;'>Sign-up</h1>
+    <div id='container' class="container">
+    <form id='form' action="" method="post" enctype = multipart/form-data >
+        {% csrf_token %}
+        <div class="container mt-5">
+            {{ form | crispy }}
+
+            <button type="submit" class='btn btn-success'>Sign-up</button> <span>Do you have account? <a class=''href="{% url 'login' %}">Login</a></span>
+        </div>
+    </form>
+</div>    
+{% endblock content %}
+    
